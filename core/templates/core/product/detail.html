@@ -1,0 +1,46 @@
+{% extends 'core/index.html' %}
+{% block title %} 
+
+{{product.name}}
+
+{% endblock title %}
+
+{% block main %}
+
+<div class="row align-items-center gap-5">
+    <div class="col">
+        <img style="width:25rem" src="{{product.image.url}}" alt="">
+    </div>
+    <div class="col">
+        <h3>  {{product.name}} </h3>
+        <p> Description : {{product.description}} </p>
+        <p> Price : {{product.price}} </p>
+        <a class="text-decoration-none "
+        href="{% url 'profile' product.id %}">
+        Owner : {{product.owner}} </a>
+        {% if owner %}
+            <a href="{% url 'update-product' product.id %}" class="btn btn-primary"> Update </a>
+            <a href="{% url 'delete-product' product.id %}" class="btn btn-danger"> Delete </a>
+            <a class="btn btn-outline-secondary" href="{% url 'home' %}">Go Back</a>
+            <a href="{% url 'profile' product.id %}">{{product.owner}} </a>
+        {% else %}
+        <form 
+            hx-post="{% url 'cart-list'  %}"
+            hx-push-url="true"
+            hx-target="body"
+            hx-swap="outerHtml">
+            {% csrf_token %}
+            <input type="hidden" value="{{product.id}}" name="product_id">
+        {% if is_cart %}
+            <a href="{% url 'remove-cart' product.id %}" class="btn btn-danger mx-3">Remove Cart</a>
+        {% else %}
+            <button type="Submit" class="btn btn-primary mx-3">Add To Cart</button>
+        {% endif %}
+        </form>
+        {%endif%}
+
+    </div>
+</div>
+
+
+{% endblock main %}

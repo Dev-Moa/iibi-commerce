@@ -1,0 +1,36 @@
+
+{% comment %} LATEST PRODUCTS {% endcomment %}
+{% if user.is_authenticated %}
+<p>welcome {{user.username}} </p>
+
+  <a class="text-decoration-none text-white btn btn-sm btn-secondary" href="{% url 'logout' %}">logout</a>
+
+{% else %}
+First Time ! <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+<div class="row justify-content-center my-5 ">
+  <h3 class="text-center mb-3">Latest Products</h3>
+  {% for product in latest_products %}
+      <div class="col-md-6">
+          <div class="card m-3">
+              {% if product.image %}
+                  <img class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
+              {% endif %}
+              <div class="card-body">
+                <h5 class="card-title">{{product.name}} </h5>
+                <p class="card-text">{{product.description}}</p>
+                <div>
+                  <p class="card-text">Price : {{product.price}}  </p>
+                  <p class="card-text">Category : {{product.category.category_name}}  </p>
+                </div>
+                <a href="{{product.get_absolute_url}}" class="btn btn-primary float-end">Get Details</a>
+              </div>
+            </div>
+      </div>
+  {% endfor %}
+</div>
+
+{% comment %} ALL PRODUCTS {% endcomment %}
+
+{% include 'core/include/products.html' %}
+

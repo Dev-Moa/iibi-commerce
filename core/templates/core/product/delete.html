@@ -1,0 +1,11 @@
+{% extends 'core/index.html' %}
+
+{% block main %}
+<form action="{% url 'delete-product' product.id %}"method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete {{product.name}} </p>
+    
+     <button class="btn btn-danger">Yes</button>
+     <a href="{% url 'home' %}">No</a>
+</form>
+{% endblock main %}

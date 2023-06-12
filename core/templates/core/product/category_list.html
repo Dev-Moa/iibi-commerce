@@ -1,0 +1,14 @@
+{% extends 'core/index.html' %}
+
+{% block title %}
+{{category.category_name}}
+{% endblock title %}
+
+{% block main %}
+
+<h3>{{category.category_name}} </h3>
+{% include 'core/include/products.html' %}
+
+{% endblock main %}
+
+

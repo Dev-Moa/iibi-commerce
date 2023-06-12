@@ -1,0 +1,26 @@
+{% extends 'core/index.html' %}
+{% block title %}
+
+Carts
+
+{% endblock title %}
+
+
+
+{% block main %}
+
+{% if  has_carts %}
+<div class="row">
+<h3 class="mb-3">Your Carts</h3>
+{% for product in carts %}
+{% include 'core/include/prod-list.html' %}
+{% endfor %}
+    
+</div>
+
+
+{% endif %}
+
+{% endblock main %}
+
+
